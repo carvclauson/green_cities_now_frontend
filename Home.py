@@ -3,20 +3,31 @@ from utils import background_image_style
 
 st.set_page_config(page_title="Green-Cities-Now: Berlin ",page_icon="🌳")
 
-st.write("# Welcome Green-Cities-Now! 👋")
+st.write("# Welcome to Green-Cities-Now! 👋")
 
 st.markdown(
 """
 Green-Cities-Now is an informative/predictive application concerned with one of
-society's most powerful tools against the impacts of Global Warming: Green Roofs.
+the most powerful chlimate change adaptation measures: Green Roofs.
 
-### Analysis
-- Check the current situation regarding Green roofs in your city
-- Select different attributes associated with green roofs and visualize their correlation.
+Despite their multiple benefits, implementation of them is slow. This application aims to provide a tool
+to predict how likely urban areas are to still implement Green Roofs. Such an analysis should help
+in identifying areas that need political intervention to be equipped against the consequences of climate change.
+
+### Berlin - Analysis
+- Here we provide an Adaptation-Likelihood analysis of Berlin
+- Select different attributes associated with green roofs and explore their relationship
 
 ### Prediction
-- Our model shows you how given attributes for a block match the attributes of blocks where a relevant portion of the roofs are green. This can be interpreted as a likelihood of a given block to achieve the same portion of green roofs.
+- Plug in your own values for the predictive features and see how likely a block with such attributes is to have a green roof implemented
+
+#### Credits
+This project was realized as part of the Le Wagon Data Science bootcamp, with contributions from Raquel Brasileiro, Juanes Hoyos, Clauson da Silva and Margaux Huth.
+
+[![Repo](https://badgen.net/badge/icon/GitHub?icon=github&label)](https://github.com/margaux-go/green_cities_now)
 """
+
+
 )
 
 image_path = 'images/background_opaque.png'
