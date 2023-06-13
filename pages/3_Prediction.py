@@ -15,30 +15,39 @@ with st.form("my_form"):
     air_pollution_input = st.text_input(
         "Enter air pollution parameter 👇"
     )
+
     thermal_stress_input = st.text_input(
         "Enter thermal stress parameter 👇"
     )
+
     social_inequality_input = st.text_input(
         "Enter social inequality parameter 👇"
     )
+
     dynamic_social_inequality_input = st.text_input(
         "Enter dynamic social inequality parameter 👇"
     )
+
     rent_input = st.text_input(
         "Enter rent parameter 👇"
     )
+
     unnemployement_benefit_input = st.text_input(
         "Enter unnemployement benefits parameter 👇"
     )
+
     social_housing_input = st.text_input(
         "Enter social housing parameter 👇"
     )
+
     city_owned_input = st.text_input(
         "Enter city owned parameter 👇"
     )
+
     rent_duration_input = st.text_input(
         "Enter rent duration parameter 👇"
     )
+
     apartments_sold_input = st.text_input(
         "Enter apartment solds parameter 👇"
     )

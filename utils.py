@@ -27,18 +27,9 @@ def background_image_style(path):
     '''
     return style
 
-
 @st.cache_data
-def from_data_to_geojson():
-    """
-    path_base: path to the project root folder
-    comp_data: complementary path to data folder
-    comp_json: complementaty path to json folder
-    """
-    # reading the green roof info
-    green_roof = pd.read_csv('./data/green_roof_raw.csv', usecols=['green_roof'])
-
-    # reading in the polygon shapefile
+def create_geojson():
+        # reading in the polygon shapefile
     map_df = gpd.read_file("./data/geometry.shp")
 
     # set GeoJSON file path
@@ -56,4 +47,23 @@ def from_data_to_geojson():
     for feature in j_file["features"]:
         feature['id'] = str(i).zfill(2)
         i += 1
-    return green_roof, j_file
+    return j_file
+
+
+@st.cache_data
+def load_geojson():
+    with open('./data/geojson.json') as geofile:
+        j_file = json.load(geofile)
+
+    # index geojson
+    i=1
+    for feature in j_file["features"]:
+        feature['id'] = str(i).zfill(2)
+        i += 1
+    return j_file
+
+def load_data(cols):
+
+    # reading columns info
+    data = pd.read_csv('./data/analysis_cols.csv', usecols=cols)
+    return data
