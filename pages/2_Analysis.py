@@ -12,16 +12,25 @@ st.markdown(""" Click Reveal to show information about Berlin. This might take u
             to a minute.""")
 
 cols_dict = {'green_roof':'Green Roofs',
-             'air_pollution':'Air Pollution'}
+             'air_pollution':'Air Pollution',
+             'thermal_stress': 'Thermal Stress',
+             'green_roof_pred': 'Green Roof Prediction'}
 
 cols = []
 green_roof = st.checkbox("Green Roofs")
+green_roof_pred = st.checkbox("Green Roof Prediction")
 air_pollut = st.checkbox("Air Pollution")
+thermal_stress = st.checkbox("Thermal Stress")
 
 if green_roof:
     cols.append("green_roof")
+if green_roof_pred:
+    cols.append("green_roof_pred")
 if air_pollut:
     cols.append("air_pollution")
+if thermal_stress:
+    cols.append('thermal_stress')
+
 
 submitted = st.button("Reveal")
 
