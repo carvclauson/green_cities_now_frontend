@@ -46,8 +46,11 @@ st.write("""
     have shown that the large majority of roofs in Berlin are suitable to carry green roofs.
     """)
 
-data = load_data(cols)
-j_file = load_geojson()
+@st.cache_data
+def get_data():
+    data = load_data(cols)
+    j_file = load_geojson()
+    return j_file
 
 
 mygrid = make_grid(4,2)

@@ -158,7 +158,8 @@ with st.form("my_form"):
         "Rent offered on market (eur/m2 per month, cold)  👇",
         min_value=7.21, 
         max_value=16.17,
-        value=12.9
+        value=12.9,
+        step=5.0
     )
 
     # Change input to percentage
@@ -166,14 +167,16 @@ with st.form("my_form"):
         "Percentage of residents in block receiveing unemployment benefits 👇",
         min_value=0.0246, 
         max_value=0.3119,
-        value=0.0787
+        value=0.0787,
+        step=0.1
     )
 
     social_housing_input = st.number_input(
         "Percentage of apartments in block that are categorised as social housing 👇",
         min_value=0.0,
         max_value=0.2609,
-        value=0.0314
+        value=0.0314,
+        step=0.1
     )
 
     hous_assoc_input = st.number_input(
@@ -194,7 +197,8 @@ with st.form("my_form"):
         "Apartments sold per 1.000 apartments between 2015 and 2020 👇",
         min_value=0.46, 
         max_value=84.35,
-        value=70.00
+        value=70.00,
+        step=5.0
     )
 
     input_data={
@@ -228,12 +232,15 @@ with st.form("my_form"):
         # API GET call
         url = 'https://greencitiesnow-3xhym4op3a-ew.a.run.app/predict'
         response = requests.get(url, params= input_data)
-        st.markdown(response.json())
-        
+                
         # Displaying prediction:
-        st.header('Probability of green roofs:')
         
-        if response.json() is False:
-            st.subheader('Low 🧱')
-        if response.json() is True:
-            st.subheader('High 🌳')
+        def res():
+            st.header('Probability of adaptation:')
+            if response.json() is False:
+                return st.subheader('🧱 Low 🧱')
+            if response.json() is True:
+                return st.subheader('🌳 High 🌳')
+            
+            
+        result = res()
