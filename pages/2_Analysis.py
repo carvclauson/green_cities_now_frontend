@@ -11,6 +11,7 @@ def make_grid(cols,rows):
     for i in range(cols):
         with st.container():
             grid[i] = st.columns(rows, gap='medium')
+            st.markdown("---")
     return grid
 
 
@@ -18,17 +19,47 @@ def make_grid(cols,rows):
 mapboxt = 'MapBox Token'
 
 st.write("## Berlin Climate Change Adaptation Analysis",)
-st.markdown(""" Analysis for Berlin is loading... This might take up to one minute.
-            \n Once the maps have loaded, you can hover over them and enlarge them by clicking on the arrows.""")
+st.markdown(""" Analysis for Berlin is loading... This might take up to one minute.""")
 
 cols_dict = {'green_roof':'Green Roofs',
              'air_pollution':'Air Pollution',
              'thermal_stress': 'Thermal Stress',
              'green_roof_pred': 'Green Roof Prediction'}
 
-cols = ['green_roof','green_roof_pred','air_pollution','thermal_stress']
+cols = ['green_roof','air_pollution','thermal_stress','green_roof_pred']
 
 
+
+st.markdown("---")
+
+
+data = load_data(cols)
+j_file = load_geojson()
+
+
+st.header('Adaptation Prediction')
+st.write("""
+The lighter the shading of the block (or closer to yellow), the higher the likelihood that green roofs will be implemented.
+These areas can be considered to be adapting 'well'.
+
+Purple areas are those where the probability of a green roof being implemented are very low.""")
+
+
+
+choro = go.Choroplethmapbox(z=data['green_roof_pred'], locations =
+        data.index, colorscale = 'Viridis', geojson = j_file, marker_line_width=0.1)
+
+bounds = go.layout.mapbox.Bounds(east = 13.8, west = 13., north = 52.7, south = 52.32)
+
+margins = go.layout.Margin(b=20,t=20)
+
+layout = go.Layout(
+        width=700, height=500,mapbox = dict(center= dict(lat=52.520008,lon=13.404954),
+        accesstoken= mapboxt, zoom=4,style="stamen-terrain",bounds = bounds),margin=margins)
+
+fig = go.Figure(data=choro, layout=layout)
+
+st.plotly_chart(fig)
 
 st.markdown("---")
 
@@ -46,14 +77,11 @@ st.write("""
     have shown that the large majority of roofs in Berlin are suitable to carry green roofs.
     """)
 
-@st.cache_data
-def get_data():
-    data = load_data(cols)
-    j_file = load_geojson()
-    return j_file
 
+st.markdown("---")
 
-mygrid = make_grid(4,2)
+# start list of text and supporting graphs
+mygrid = make_grid(3,2)
 
 
 with mygrid[0][0]:
@@ -71,17 +99,8 @@ with mygrid[0][0]:
     encompasses many more factors that are not considered here.
     """)
 
+
 with mygrid[1][0]:
-    st.header('Adaptation Prediction')
-    st.write("""
-    This map displays the probability prediction outputs of our classification model.
-
-    The lighter the shading of the block (or closer to yellow), the higher the likelihood that green roofs will be implemented.
-    These areas can be considered to be adapting 'well'.
-
-    Purple areas are those where the probability of a green roof being implemented are very low.""")
-
-with mygrid[2][0]:
     st.header("Air Pollution")
     st.write("""
     Air poulltion data from the Berlin Open Data Portal is categorized into 'high', 'medium' and 'low'. As can be observed in
@@ -91,7 +110,7 @@ with mygrid[2][0]:
     amount of green roofs are located in the most polluted areas.
     """)
 
-with mygrid[3][0]:
+with mygrid[2][0]:
     st.header('Thermal Stress')
     st.write("""
     This last map displays the Thermal Stress categorization from the Berlin Open Data Portal, which indicates areas that
@@ -104,7 +123,7 @@ with mygrid[3][0]:
     """)
 
 
-for idx, col in enumerate(cols):
+for idx, col in enumerate(cols[:3]):
     choro = go.Choroplethmapbox(z=data[col], locations =
             data.index, colorscale = 'Viridis', geojson = j_file, marker_line_width=0.1)
 
