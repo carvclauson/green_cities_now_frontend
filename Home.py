@@ -8,7 +8,7 @@ st.write("# Welcome to Green-Cities-Now! 👋")
 st.markdown(
 """
 Green-Cities-Now is an informative/predictive application concerned with one of
-the most powerful chlimate change adaptation measures: Green Roofs.
+the most powerful Climate Change adaptation measures: Green Roofs.
 
 Despite their multiple benefits, implementation of them is slow. This application aims to provide a tool
 to predict how likely urban areas are to still implement Green Roofs. Such an analysis should help

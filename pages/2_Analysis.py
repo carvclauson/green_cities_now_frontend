@@ -17,9 +17,9 @@ def make_grid(cols,rows):
 # mapbox token
 mapboxt = 'MapBox Token'
 
-st.write("# Berlin Climate Change Adaptation Analysis")
-st.markdown(""" Analysis for Berlin is loading. This might take up
-            to a minute.""")
+st.write("## Berlin Climate Change Adaptation Analysis",)
+st.markdown(""" Analysis for Berlin is loading... This might take up to one minute.
+            \n Once the maps have loaded, you can hover over them and enlarge them by clicking on the arrows.""")
 
 cols_dict = {'green_roof':'Green Roofs',
              'air_pollution':'Air Pollution',
@@ -32,9 +32,23 @@ cols = ['green_roof','green_roof_pred','air_pollution','thermal_stress']
 
 st.markdown("---")
 
+st.header('Model and Data')
+st.write("""
+    We trained a classification model on data from the Berlin Open Data Portal, which covered 15 features (including
+    number of residents, usetype, air pollution, green roof subsidy program eligbility, social inequality index).
+
+    The model was then run on all blocks in Berlin that do not have a green roof as of yet to predict the probability that
+    these have a green roof implemented. Knowing that these blocks are in fact empty, allows
+    the interpretation that blocks with higher percentages are likely to still implement green roofs, and areas
+    with lower percentages will need political and societal intervention, in order to make sure they will adapt as well.
+
+    It is important to note that this is not a potential analysis of where green roofs _can_ be implemented. Seperate analyses
+    have shown that the large majority of roofs in Berlin are suitable to carry green roofs.
+    """)
 
 data = load_data(cols)
 j_file = load_geojson()
+
 
 mygrid = make_grid(4,2)
 
@@ -43,61 +57,48 @@ with mygrid[0][0]:
     st.header('Green Roofs')
 
     st.write(
-    """Since 1975 the world has been growing by billion people every 12 years.
-    It passed 7 billion in 2011 and, by the end of 2022,
-    #there will be 8 billion people in the world.
-    #But, the growth rate is below 1%, less than half its peak rate of growth - of 2.3% - in the 1960s.
+    """ Green roofs in cities are especially important for their ability to reduce the impacts of
+    heavy rain events and urban heat island effects. Additionally they provide habitat for insects
+    and contribute to biodiversity conservation.
 
-    #Since 1975 the world has been growing by billion people every 12 years.
-    #It passed 7 billion in 2011 and, by the end of 2022,
-    #there will be 8 billion people in the world.
-    #But, the growth rate is below 1%, less than half its peak rate of growth - of 2.3% - in the 1960s.
+    Currently only about 3% of roof tops in Berlin are greened. The map on the right displays all blocks in Berlin
+    that contain green roofs for more than 15% of the building foot print area, highlighted in yellow color.
+
+    Here, we are presenting green roofs as a proxy for Climate Change adaptation in general. In reality of course, adaptation
+    encompasses many more factors that are not considered here.
     """)
 
 with mygrid[1][0]:
-    st.header('Green Roof Prediction')
+    st.header('Adaptation Prediction')
     st.write("""
-    \n \n \n \n Since 1975 the world has been growing by billion people every 12 years.
-    It passed 7 billion in 2011 and, by the end of 2022,
-    #there will be 8 billion people in the world.
-    #But, the growth rate is below 1%, less than half its peak rate of growth - of 2.3% - in the 1960s.
+    This map displays the probability prediction outputs of our classification model.
 
-    #Since 1975 the world has been growing by billion people every 12 years.
-    #It passed 7 billion in 2011 and, by the end of 2022,
-    #there will be 8 billion people in the world.
-    #But, the growth rate is below 1%, less than half its peak rate of growth - of 2.3% - in the 1960s.
+    The lighter the shading of the block (or closer to yellow), the higher the likelihood that green roofs will be implemented.
+    These areas can be considered to be adapting 'well'.
 
-    #""")
+    Purple areas are those where the probability of a green roof being implemented are very low.""")
 
 with mygrid[2][0]:
     st.header("Air Pollution")
     st.write("""
-    \n \n \n \n Since 1975 the world has been growing by billion people every 12 years.
-    It passed 7 billion in 2011 and, by the end of 2022,
-    #there will be 8 billion people in the world.
-    #But, the growth rate is below 1%, less than half its peak rate of growth - of 2.3% - in the 1960s.
+    Air poulltion data from the Berlin Open Data Portal is categorized into 'high', 'medium' and 'low'. As can be observed in
+    the map, the most center of Berlin is most polluted.
 
-    #Since 1975 the world has been growing by billion people every 12 years.
-    #It passed 7 billion in 2011 and, by the end of 2022,
-    #there will be 8 billion people in the world.
-    #But, the growth rate is below 1%, less than half its peak rate of growth - of 2.3% - in the 1960s.
-
-    #""")
+    When comparing this map to the current state of green roof coverage in Berlin, we can see that the most
+    amount of green roofs are located in the most polluted areas.
+    """)
 
 with mygrid[3][0]:
     st.header('Thermal Stress')
     st.write("""
-    \n \n \n \n Since 1975 the world has been growing by billion people every 12 years.
-    It passed 7 billion in 2011 and, by the end of 2022,
-    #there will be 8 billion people in the world.
-    #But, the growth rate is below 1%, less than half its peak rate of growth - of 2.3% - in the 1960s.
+    This last map displays the Thermal Stress categorization from the Berlin Open Data Portal, which indicates areas that
+    where on warmer days, the heat can become pysiologically burdonsome. Categories here are also 'high', 'medium' and 'low'.
 
-    #Since 1975 the world has been growing by billion people every 12 years.
-    #It passed 7 billion in 2011 and, by the end of 2022,
-    #there will be 8 billion people in the world.
-    #But, the growth rate is below 1%, less than half its peak rate of growth - of 2.3% - in the 1960s.
+    Given that the distribution in this map is different from that of Air Pollution, it too, should be taken into account
+    for further green roof implementation. Especially combined with our prediction, areas of priority can be identified.
 
-    #""")
+    Areas with high thermal stress, high air pollution and low adaptation likelihood should be the focus of any further political climate change adaptation efforts in Berlin.
+    """)
 
 
 for idx, col in enumerate(cols):
