@@ -77,6 +77,7 @@ st.write("""
     have shown that the large majority of roofs in Berlin are suitable to carry green roofs.
     """)
 
+
 st.markdown("---")
 
 # start list of text and supporting graphs
