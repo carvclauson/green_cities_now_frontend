@@ -24,9 +24,9 @@ st.markdown(""" Analysis for Berlin is loading... This might take up to one minu
 cols_dict = {'green_roof':'Green Roofs',
              'air_pollution':'Air Pollution',
              'thermal_stress': 'Thermal Stress',
-             'green_roof_pred': 'Green Roof Prediction'}
+             'green_roof_pred_thresh': 'Green Roof Prediction'}
 
-cols = ['green_roof','air_pollution','thermal_stress','green_roof_pred']
+cols = ['green_roof','air_pollution','thermal_stress','green_roof_pred_thresh']
 
 
 
@@ -46,7 +46,7 @@ Purple areas are those where the probability of a green roof being implemented a
 
 
 
-choro = go.Choroplethmapbox(z=data['green_roof_pred'], locations =
+choro = go.Choroplethmapbox(z=data['green_roof_pred_thresh'], locations =
         data.index, colorscale = 'Viridis', geojson = j_file, marker_line_width=0.1)
 
 bounds = go.layout.mapbox.Bounds(east = 13.8, west = 13., north = 52.7, south = 52.32)

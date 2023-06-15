@@ -43,7 +43,7 @@ def create_geojson():
         j_file = json.load(geofile)
 
     # index geojson
-    i=1
+    i=0
     for feature in j_file["features"]:
         feature['id'] = str(i).zfill(2)
         i += 1
@@ -56,7 +56,7 @@ def load_geojson():
         j_file = json.load(geofile)
 
     # index geojson
-    i=1
+    i=0
     for feature in j_file["features"]:
         feature['id'] = str(i).zfill(2)
         i += 1
