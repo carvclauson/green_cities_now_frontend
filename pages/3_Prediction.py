@@ -90,18 +90,18 @@ st.write("# Green-Cities-Now: Predict")
 with st.form("my_form"):
     st.write("Fill the attributes in the following form")
     #slider_val = st.slider("Form slider")
-    
+
     subsid_val = st.radio(
         "Green Roof Subsidy Program eligibility:",
         ('True', 'False'))
 
-    
+
     usetype_block = st.selectbox(
         "Enter type of block usage 👇",
         tuple(trans_usetype_block.keys())
     )
-    
-    
+
+
     district_input = st.selectbox(
     "Choose a disctrict 👇",
     ('Charlottenburg-Wilmersdorf',
@@ -116,20 +116,20 @@ with st.form("my_form"):
     'Steglitz-Zehlendorf',
     'Tempelhof-Schöneberg',
     'Treptow-Köpenick'))
-    
+
     #Dropdown with building types -> TRANSLATION NEEDED
     built_type_input = st.selectbox(
         "Choose type of building 👇",
         tuple(trans_built_type.keys())
     )
-    
+
     residents_input = st.number_input(
         "Select number of residents of the block 👇",
         min_value=1,
         value=128,
         step=1
     )
-    
+
     air_pollution_input = st.select_slider(
     "Enter level of air pollution 👇",
     options=list(trans_low_to_high.keys()),
@@ -156,7 +156,7 @@ with st.form("my_form"):
     # Change input to EURO
     rent_input = st.number_input(
         "Rent offered on market (eur/m2 per month, cold)  👇",
-        min_value=7.21, 
+        min_value=7.21,
         max_value=16.17,
         value=12.9,
         step=5.0
@@ -165,7 +165,7 @@ with st.form("my_form"):
     # Change input to percentage
     unnemployement_benefit_input = st.number_input(
         "Percentage of residents in block receiveing unemployment benefits 👇",
-        min_value=0.0246, 
+        min_value=0.0246,
         max_value=0.3119,
         value=0.0787,
         step=0.1
@@ -188,14 +188,14 @@ with st.form("my_form"):
 
     rent_duration_input = st.number_input(
         "Percentage of residents having lived there longer than 5 years 👇",
-        min_value=0.5241, 
+        min_value=0.5241,
         max_value=0.7687,
         value=0.6566
     )
 
     apartments_sold_input = st.number_input(
         "Apartments sold per 1.000 apartments between 2015 and 2020 👇",
-        min_value=0.46, 
+        min_value=0.46,
         max_value=84.35,
         value=70.00,
         step=5.0
@@ -222,25 +222,21 @@ with st.form("my_form"):
     # Every form must have a submit button.
     submitted = st.form_submit_button("Submit")
     if submitted:
-        #st.write("slider", slider_val, "checkbox", checkbox_val)
-        #st.write("checkbox", subsid_val)
-
-        #testing get call
-        #url = f'https://greencitiesnow-3xhym4op3a-ew.a.run.app/predict?subsidized={subsid}'
-        #response = requests.get(url)
-
         # API GET call
-        url = 'https://greencitiesnow-3xhym4op3a-ew.a.run.app/predict'
+        #url = 'https://greencitiesnow-3xhym4op3a-ew.a.run.app/predict'
+
+        #url of the new and clean backend
+        url = 'https://gcnb-7i5ykxmpsa-ey.a.run.app/predict'
         response = requests.get(url, params= input_data)
-                
+
         # Displaying prediction:
-        
+
         def res():
             st.header('Probability of adaptation:')
             if response.json() is False:
                 return st.subheader('🧱 Low 🧱')
             if response.json() is True:
                 return st.subheader('🌳 High 🌳')
-            
-            
+
+
         result = res()
