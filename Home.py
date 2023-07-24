@@ -24,7 +24,7 @@ in identifying areas that need political intervention to be equipped against the
 #### Credits
 This project was realized as part of the Le Wagon Data Science bootcamp, with contributions from Raquel Brasileiro, Juanes Hoyos, Clauson da Silva and Margaux Huth.
 
-[![Repo](https://badgen.net/badge/icon/GitHub?icon=github&label)](https://github.com/margaux-go/green_cities_now)
+[![Repo](https://badgen.net/badge/icon/GitHub?icon=github&label)](https://github.com/margaux-go/green_cities_now_berlin)
 """
 
 
